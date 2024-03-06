@@ -8,3 +8,8 @@ data_ingestion_config:
   dataset_download_url: "https://github.com/sumitwatkar/Main-Branching/blob/main/retail.zip"
   ingested_dir: ingested_data
   raw_data_dir: raw_data
+
+# Configuration for data validation
+data_validation_config:
+  schema_dir: config
+  schema_file_name: schema.yaml

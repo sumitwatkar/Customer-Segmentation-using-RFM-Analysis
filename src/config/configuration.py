@@ -61,6 +61,46 @@ class Configuration:
         except Exception as e:
             raise CustomException(e,sys) from e
 
+    
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+        try:
+            # Get the directory where artifacts are stored from the training pipeline config
+            artifact_dir = self.training_pipeline_config.artifact_dir
+
+            # Construct the directory path for data validation artifacts based on the timestamp
+            data_validation_artifact_dir=os.path.join(
+                artifact_dir,
+                DATA_VALIDATION_ARTIFACT_DIR,
+                self.time_stamp
+            )
+
+            # Get the data validation configuration from the overall config information
+            data_validation_config = self.config_info[DATA_VALIDATION_CONFIG_KEY]
+            
+            # Construct the path to the validated dataset
+            validated_path=os.path.join(data_validation_artifact_dir,DATA_VALIDATION_VALID_DATASET)
+            
+            # Construct the path to the validated training data within the data validation artifact directory
+            validated_train_path=os.path.join(data_validation_artifact_dir,validated_path,DATA_VALIDATION_TRAIN_FILE)
+            
+            # Construct the file path for the schema based on configuration information
+            schema_file_path = os.path.join(
+                ROOT_DIR,
+                data_validation_config[DATA_VALIDATION_SCHEMA_DIR_KEY],
+                data_validation_config[DATA_VALIDATION_SCHEMA_FILE_NAME_KEY]
+            )
+            
+            # Create a DataValidationConfig object with the constructed paths
+            data_validation_config = DataValidationConfig(
+                schema_file_path=schema_file_path,validated_train_path=validated_train_path)
+            
+            return data_validation_config
+        
+        except Exception as e:
+            raise CustomException(e,sys) from e
+
+
 
     # Method to retrieve training pipeline configuration
     def get_training_pipeline_config(self)->TrainingPipelineConfig:
