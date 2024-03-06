@@ -1,0 +1,10 @@
+# Configuration for the training pipeline
+training_pipeline_config:
+  pipeline_name: customer_segmentation_artifacts
+  artifact_dir: artifact
+
+# Configuration for data ingestion
+data_ingestion_config:
+  dataset_download_url: "https://github.com/sumitwatkar/Main-Branching/blob/main/retail.zip"
+  ingested_dir: ingested_data
+  raw_data_dir: raw_data
