@@ -100,7 +100,49 @@ class Configuration:
         except Exception as e:
             raise CustomException(e,sys) from e
 
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        """
+    Method to retrieve data transformation configuration.
 
+    Returns:
+        DataTransformationConfig: Object containing data transformation configuration.
+    """
+        try:
+            # Define the directory paths for storing data transformation artifacts
+            artifact_dir = self.training_pipeline_config.artifact_dir
+            data_transformation_artifact_dir = os.path.join(artifact_dir, 
+                                                            DATA_TRANSFORMATION_ARTIFACT_DIR, 
+                                                            self.time_stamp)
+            
+            # Retrieve data transformation configuration from the  configuration
+            data_transformation_config = self.config_info[DATA_TRANSFORMATION_CONFIG_KEY]
+
+            # Define file paths for preprocessed and feature engineered data
+            preprocessed_object_file_path = os.path.join(data_transformation_artifact_dir,
+                                                        data_transformation_config[DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY],
+                                                        data_transformation_config[DATA_TRANSFORMATION_PREPROCESSING_FILE_NAME_KEY])
+
+            feature_engineering_object_file_path = os.path.join(data_transformation_artifact_dir,
+                                                        data_transformation_config[DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY],
+                                                        data_transformation_config[DATA_TRANSFORMATION_FEATURE_ENGINEERING_FILE_NAME_KEY])
+
+            # Define directory path for transformed training data
+            transformed_train_dir = os.path.join(data_transformation_artifact_dir,
+                                                        data_transformation_config[DATA_TRANSFORMATION_DIR_NAME_KEY],
+                                                        data_transformation_config[DATA_TRANSFORMATION_TRAIN_DIR_NAME_KEY])
+
+            # Create DataTransformationConfig object with the obtained paths
+            data_transformation_config = DataTransformationConfig(transformed_train_dir=transformed_train_dir,
+                                                        preprocessed_object_file_path=preprocessed_object_file_path,
+                                                        feature_engineering_object_file_path=feature_engineering_object_file_path)
+            
+            
+            logging.info(f"Data Transformation Config: {data_transformation_config}")
+            return data_transformation_config
+        
+        except Exception as e:
+            raise CustomException(e,sys) from e
 
     # Method to retrieve training pipeline configuration
     def get_training_pipeline_config(self)->TrainingPipelineConfig:

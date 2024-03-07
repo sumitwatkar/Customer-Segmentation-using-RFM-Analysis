@@ -13,3 +13,11 @@ data_ingestion_config:
 data_validation_config:
   schema_dir: config
   schema_file_name: schema.yaml
+
+# Configuration for data transformation
+data_transformation_config:
+  transformed_dir: transformed_data
+  transformed_train_dir: train
+  preprocessing_dir: preprocessed
+  feature_engineering_object_file_name: feat_eng.pkl
+  preprocessed_object_file_name: preprocessed.pkl

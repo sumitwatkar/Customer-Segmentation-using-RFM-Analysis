@@ -7,3 +7,11 @@ DataIngestionArtifact = namedtuple('DataIngestionArtifact',
 # Defining DataValidationArtifact namedtuple to represent artifacts generated during data validation
 DataValidationArtifact = namedtuple("DataValidationArtifact",
 ["schema_file_path","is_validated","message","validated_train_path"])
+
+
+# Defining DataTransformationArtifact namedtuple to represent artifacts generated during data transformation
+DataTransformationArtifact = namedtuple("DataTransformationArtifact",["is_transformed",
+                                                                    "message","feature_eng_train_file_path",
+                                                                    "transformed_train_file_path",
+                                                                    "preprocessed_object_file_path",
+                                                                    "feature_engineering_object_file_path"])
