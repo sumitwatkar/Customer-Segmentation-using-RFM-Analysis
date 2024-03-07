@@ -61,3 +61,18 @@ def save_object(file_path: str, obj):
     
     except Exception as e:
         raise CustomException(e, sys) from e
+    
+
+def write_yaml_file(file_path: str, data: dict = None):
+    try:
+        # Create the directory structure for the file path if it does not exist
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        
+        # Open the file in write mode
+        with open(file_path, "w") as yaml_file:
+            # If data is provided, write it to the YAML file using YAML.dump()
+            if data is not None:
+                yaml.dump(data, yaml_file)
+    
+    except Exception as e:
+        raise CustomException(e, sys)

@@ -17,5 +17,13 @@ DataTransformationConfig = namedtuple("DataTransformationConfig",["transformed_t
                                                                   "feature_engineering_object_file_path"])
 
 
+# Defining DataTransformationConfig namedtuple to represent configuration parameters for model trainer
+ModelTrainerConfig = namedtuple("ModelTrainerConfig",["trained_model_directory",
+                                                      "trained_model_file_path",
+                                                      "png_location",
+                                                      "model_config_path",
+                                                      "report_path"])
+
+
 # Defining TrainingPipelineConfig namedtuple to represent configuration parameters for the training pipeline
 TrainingPipelineConfig= namedtuple("TrainingPipelineConfig",["artifact_dir"])

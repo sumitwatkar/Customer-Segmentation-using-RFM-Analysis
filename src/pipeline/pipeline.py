@@ -6,6 +6,7 @@ from src.entity.artifact_entity import*
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 
 
 class Pipeline():
@@ -81,6 +82,23 @@ class Pipeline():
             raise CustomException(e,sys) from e
 
 
+    def start_model_training(self,data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
+        """
+        Starts the model training process.
+
+        Returns:
+        - ModelTrainerArtifact: The artifact produced after model training.
+        """
+        try:
+            model_trainer = ModelTrainer(model_trainer_config=self.config.get_model_trainer_config(),
+                                         
+                                        data_transformation_artifact=data_transformation_artifact)   
+
+            return model_trainer.initiate_model_training()
+        
+        except Exception as e:
+            raise CustomException(e,sys) from e 
+
 
     def run_pipeline(self):
         """
@@ -96,5 +114,9 @@ class Pipeline():
             # Start data transformation process
             data_transformation_artifact = self.start_data_transformation(data_ingestion_artifact=data_ingestion_artifact,
                                                              data_validation_artifact=data_validation_artifact)
+
+            # Start model training process
+            model_trainer_artifact = self.start_model_training(data_transformation_artifact=data_transformation_artifact)
+        
         except Exception as e:
             raise CustomException(e, sys) from e

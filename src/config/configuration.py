@@ -144,6 +144,48 @@ class Configuration:
         except Exception as e:
             raise CustomException(e,sys) from e
 
+    
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        try:
+            # Get the artifact directory from the training pipeline configuration
+            artifact_dir = self.training_pipeline_config.artifact_dir
+            
+            # Define the directory for storing model trainer artifacts, including a timestamped subdirectory
+            model_trainer_artifact_dir = os.path.join(artifact_dir, MODEL_TRAINER_ARTIFACT_DIR, self.time_stamp)
+
+            # Extract model trainer configuration from the overall configuration
+            model_trainer_config = self.config_info[MODEL_TRAINER_CONFIG_KEY]
+            
+            # Define the directory where the trained model will be saved
+            trained_model_directory = os.path.join(model_trainer_artifact_dir, model_trainer_config[MODEL_TRAINER_TRAINED_MODEL_DIR])
+
+            # Define the file path for the trained model
+            trained_model_file_path = os.path.join(trained_model_directory, model_trainer_config[MODEL_TRAINER_TRAINED_MODEL_FILE_NAME_KEY])
+            
+            # Define the path to the model configuration file
+            model_config_path = os.path.join(ROOT_DIR, CONFIG_DIR, 'model.yaml')
+            
+            # Define the directory for storing PNG files related to model predictions
+            png_location = os.path.join(model_trainer_artifact_dir, 'model_predictions')
+            
+            # Define the path for storing the model report
+            model_report_path = os.path.join(model_trainer_artifact_dir, model_trainer_config[MODEL_TRAINER_TRAINED_MODEL_DIR])
+
+            # Create a ModelTrainerConfig object with the defined parameters
+            model_trainer_config = ModelTrainerConfig(trained_model_directory=trained_model_directory,
+                                                    trained_model_file_path=trained_model_file_path,
+                                                    model_config_path=model_config_path,
+                                                    report_path=model_report_path,
+                                                    png_location=png_location)
+      
+            logging.info(f"Model Trainer Config : {model_trainer_config}")
+        
+            return model_trainer_config
+    
+        except Exception as e:
+            raise CustomException(e, sys) from e
+
+    
     # Method to retrieve training pipeline configuration
     def get_training_pipeline_config(self)->TrainingPipelineConfig:
         

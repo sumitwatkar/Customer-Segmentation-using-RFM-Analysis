@@ -21,3 +21,9 @@ data_transformation_config:
   preprocessing_dir: preprocessed
   feature_engineering_object_file_name: feat_eng.pkl
   preprocessed_object_file_name: preprocessed.pkl
+
+# Configuration for model trainer
+model_trainer_config:
+  trained_model_dir: trained_model
+  model_file_name: model.pkl
+  base_accuracy: 0.6

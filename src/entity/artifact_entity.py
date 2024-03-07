@@ -15,3 +15,15 @@ DataTransformationArtifact = namedtuple("DataTransformationArtifact",["is_transf
                                                                     "transformed_train_file_path",
                                                                     "preprocessed_object_file_path",
                                                                     "feature_engineering_object_file_path"])
+
+
+# Defining DataTransformationArtifact namedtuple to represent artifacts generated during model trainer
+ModelTrainerArtifact =namedtuple("ModelTrainerArtifact",[
+                                                            "is_trained",
+                                                            "message",
+                                                            "model_selected",
+                                                            "model_prediction_png",
+                                                            "model_name",
+                                                            "report_path",
+                                                            "csv_file_path"
+                                                        ])
