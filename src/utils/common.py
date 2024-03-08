@@ -4,6 +4,7 @@ from src.constants import *
 from src.exception import CustomException
 import pandas as pd
 import dill
+import pickle
 
 
 def read_yaml_file(file_path:str)->dict:
@@ -76,3 +77,23 @@ def write_yaml_file(file_path: str, data: dict = None):
     
     except Exception as e:
         raise CustomException(e, sys)
+
+def load_object(file_path):
+    """
+    Function to load an object from a pickle file.
+
+    Args:
+        file_path (str): The path to the pickle file.
+
+    Returns:
+        object: The loaded object.
+
+    """
+    try:
+        # Open the pickle file in binary read mode
+        with open(file_path, 'rb') as file:
+            # Load the object from the file
+            obj = pickle.load(file)
+        return obj
+    except Exception as e:
+        print("Error occurred while loading object from pickle:", e)

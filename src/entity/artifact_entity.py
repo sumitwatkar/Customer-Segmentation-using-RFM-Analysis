@@ -27,3 +27,11 @@ ModelTrainerArtifact =namedtuple("ModelTrainerArtifact",[
                                                             "report_path",
                                                             "csv_file_path"
                                                         ])
+# Defining ModelEvaluationArtifact namedtuple to represent artifacts generated during model evaluation
+ModelEvaluationArtifact=namedtuple("ModelEvaluationArtifact",["model_name",
+                                                              "Silhouette_score",
+                                                              "selected_model_path",
+                                                              "model_prediction_png",
+                                                              "optimal_cluster",
+                                                              "rfm_csv_path",
+                                                              "model_report_path"])

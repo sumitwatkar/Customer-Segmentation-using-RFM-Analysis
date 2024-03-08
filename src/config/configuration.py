@@ -185,6 +185,40 @@ class Configuration:
         except Exception as e:
             raise CustomException(e, sys) from e
 
+
+    def saved_model_config(self) -> SavedModelConfig:
+        """
+    Method to retrieve and configure paths for the saved model files and related artifacts.
+
+    Returns:
+        SavedModelConfig: An object containing paths to the saved model file, report file, prediction image,
+                          and CSV file.
+    """
+        try:
+            # Get the directory where artifacts are stored from the training pipeline configuration
+            artifact_dir = self.training_pipeline_config.artifact_dir
+            
+            # Define paths for the saved model file, report file, prediction image, and CSV file
+            saved_model_file_path = os.path.join(ROOT_DIR, SAVED_MODEL_DIRECTORY, 'model.pkl')
+            saved_report_file_path = os.path.join(ROOT_DIR, SAVED_MODEL_DIRECTORY, MODEL_REPORT_FILE)
+            saved_model_prediction_png = os.path.join(ROOT_DIR, SAVED_MODEL_DIRECTORY, 'prediction.png')
+            saved_model_csv = os.path.join(ROOT_DIR, SAVED_MODEL_DIRECTORY, 'rfm.csv')
+            
+            # Create a SavedModelConfig object with the defined paths
+            saved_model_config = SavedModelConfig(saved_model_file_path=saved_model_file_path,
+                                                    saved_report_file_path=saved_report_file_path,
+                                                    saved_model_csv=saved_model_csv,
+                                                    saved_model_prediction_png=saved_model_prediction_png)
+            
+            # Log the configuration
+            logging.info(f"Model Trainer Config : {saved_model_config}")
+            
+            return saved_model_config
+            
+        except Exception as e:
+            raise CustomException(e, sys) from e
+
+
     
     # Method to retrieve training pipeline configuration
     def get_training_pipeline_config(self)->TrainingPipelineConfig:

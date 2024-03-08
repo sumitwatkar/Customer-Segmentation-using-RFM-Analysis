@@ -7,6 +7,7 @@ from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
+from src.components.model_evaluation import ModelEvaluation
 
 
 class Pipeline():
@@ -99,6 +100,21 @@ class Pipeline():
         except Exception as e:
             raise CustomException(e,sys) from e 
 
+    
+    def start_model_evaluation(self,data_validation_artifact:DataValidationArtifact,
+                                 model_trainer_artifact:ModelTrainerArtifact):
+        """
+        Starts the model training process
+        """
+        try:
+            model_eval = ModelEvaluation(data_validation_artifact,model_trainer_artifact)
+                                         
+            model_eval_artifact = model_eval.initiate_model_evaluation()
+            return model_eval_artifact
+        
+        except  Exception as e:
+            raise  CustomException(e,sys)
+
 
     def run_pipeline(self):
         """
@@ -117,6 +133,9 @@ class Pipeline():
 
             # Start model training process
             model_trainer_artifact = self.start_model_training(data_transformation_artifact=data_transformation_artifact)
+        
+            # Start model evaulation process
+            model_eval_artifact = self.start_model_evaluation(data_validation_artifact, model_trainer_artifact)
         
         except Exception as e:
             raise CustomException(e, sys) from e
