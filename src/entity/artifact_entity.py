@@ -35,3 +35,6 @@ ModelEvaluationArtifact=namedtuple("ModelEvaluationArtifact",["model_name",
                                                               "optimal_cluster",
                                                               "rfm_csv_path",
                                                               "model_report_path"])
+
+# Defining ModelPusherArtifact namedtuple to represent artifacts generated during model pusher
+ModelPusherArtifact=namedtuple("ModelPusherArtifact",["message"])
