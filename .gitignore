@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 customer_segmentation_artifacts/artifact
+
+data/retail.csv
