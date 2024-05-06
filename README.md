@@ -1,10 +1,10 @@
 # Customer Segmentation using RFM Analysis
 
-## Overview
+## Overview:
 
 - The project aimed to analyze customer data and develop customer segmentation based on purchasing power and income levels using RFM analysis and machine learning models. This approach enabled the business to understand the spending behavior and purchasing power of different customer segments, thereby optimizing marketing efforts and increasing revenue. The project utilized clustering algorithms such as K-means Clustering,  Gaussian Mixture Model (GMM) for segmentation, as well as a comprehensive data pipeline for preprocessing, validation, transformation, and model training.
 
-## Methodologies
+## Methodologies:
 
 **1. Data Ingestion and Validation**: Ingested customer data and performed data validation checks, including file name, column labels, data types, and missing values validation.
 
@@ -16,13 +16,13 @@
 
 **5. UI for User Interaction**: Developed a user-friendly interface for stakeholders to interact with trained models and cluster labeling.
 
-## Technologies and Tools Used
+## Technologies and Tools Used:
 
 **1. Packages**: pandas, numpy, matplotlib, seaborn, scipy, scikit-learn.
 
 **2. Machine Learning Algorithms**: Clustering algorithms such as K-means Clustering and Gaussian Mixture Model (GMM).
 
-## Outcomes
+## Outcomes:
 
 **1. Customer Segmentation**: Identified key customer segments such as "**Affluent Customers**" (high income, high spending), "**Middle-Income Customers**" (moderate income and spending), and "**Budget-Conscious Customers**" (low income, low spending).
 
