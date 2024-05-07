@@ -16,7 +16,7 @@
 
 **5. UI for User Interaction**: Developed a user-friendly interface for stakeholders to interact with trained models and cluster labeling.
 
-## Technologies and Tools Used:
+## Tools and Technologies Used:
 
 **1. Packages**: pandas, numpy, matplotlib, seaborn, scipy, scikit-learn.
 
